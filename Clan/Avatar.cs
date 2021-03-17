@@ -1,0 +1,115 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Clan
+{
+    public partial class Avatar : Form
+    {
+        Battle battle = new Battle();
+        SelectProfile profile = new SelectProfile();
+        public Avatar()
+        {
+           
+            repository = new Profile();
+            InitializeComponent();
+        }
+
+        public int avatar = 0;
+        IProfile repository;
+        string selectprofile;
+       
+        private void Border_setting()
+        {
+            face1.BorderStyle = BorderStyle.None;
+            face2.BorderStyle = BorderStyle.None;
+            face3.BorderStyle = BorderStyle.None;
+            face4.BorderStyle = BorderStyle.None;
+            face5.BorderStyle = BorderStyle.None;
+            face6.BorderStyle = BorderStyle.None;
+        }
+
+
+       
+
+        private void Avatar_Load(object sender, EventArgs e)
+        {
+
+        }
+
+       
+       private void face1_Click_1(object sender, EventArgs e)
+        {
+            Border_setting();
+            face1.BorderStyle = BorderStyle.Fixed3D;
+            avatar = 1;
+        }
+
+        private void face2_Click(object sender, EventArgs e)
+        {
+            Border_setting();
+            face2.BorderStyle = BorderStyle.Fixed3D;
+            avatar = 2;
+        }
+
+        private void face3_Click(object sender, EventArgs e)
+        {
+            Border_setting();
+            face3.BorderStyle = BorderStyle.Fixed3D;
+            avatar = 3;
+        }
+
+        private void face4_Click(object sender, EventArgs e)
+        {
+            Border_setting();
+            face4.BorderStyle = BorderStyle.Fixed3D;
+            avatar = 4;
+        }
+
+        private void face5_Click(object sender, EventArgs e)
+        {
+            Border_setting();
+            face5.BorderStyle = BorderStyle.Fixed3D;
+            avatar = 5;
+        }
+
+        private void face6_Click(object sender, EventArgs e)
+        {
+            Border_setting();
+            face6.BorderStyle = BorderStyle.Fixed3D;
+            avatar = 6;
+        }
+
+        private void btnchange_Click(object sender, EventArgs e)
+        {
+            bool isSuccess;
+            if (avatar != 0)
+            {
+                isSuccess = repository.Update_Avatar(avatar,1);
+                if (isSuccess == true)
+                {
+                    DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    MessageBox.Show("Somthing went wrong");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Choose your avatar");
+            }
+        }
+
+        private void Avatar_Load_1(object sender, EventArgs e)
+        {
+
+        }
+    }
+}

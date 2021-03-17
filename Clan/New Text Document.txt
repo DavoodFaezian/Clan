@@ -1,0 +1,178 @@
+				Profile
+
+
+ public bool Update_Avatar(int Avatar, int ID)
+        {
+            SqlConnection connection = new SqlConnection(Connection);
+            try
+            {
+                string query = "Update [dbo].[Clan_Profile] set Avatar = @Avatar Where PlayerID = @ID";
+                SqlCommand command = new SqlCommand(query,connection);
+                command.Parameters.AddWithValue("@ID", ID);
+                command.Parameters.AddWithValue("@Avatar", Avatar);
+                connection.Open();
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
+
+
+
+				Avatar
+
+public int avatar = 0;
+        IProfile repository; 
+        string selectprofile;
+        public Avatar()
+        {           
+            repository = new Profile();
+            InitializeComponent();
+        }
+        private void Border_setting()
+        {
+            face1.BorderStyle = BorderStyle.None;
+            face2.BorderStyle = BorderStyle.None;
+            face3.BorderStyle = BorderStyle.None;
+            face4.BorderStyle = BorderStyle.None;
+            face5.BorderStyle = BorderStyle.None;
+            face6.BorderStyle = BorderStyle.None;
+        }
+
+
+        private void face1_Click(object sender, EventArgs e)
+        {
+            Border_setting();
+            face1.BorderStyle = BorderStyle.Fixed3D;
+            avatar = 1;
+        }
+        private void face2_Click(object sender, EventArgs e)
+        {
+            Border_setting();
+            face2.BorderStyle = BorderStyle.Fixed3D;
+            avatar = 2;
+        }
+        private void face3_Click(object sender, EventArgs e)
+        {
+            Border_setting();
+            face3.BorderStyle = BorderStyle.Fixed3D;
+            avatar = 3;
+        }
+
+        private void face4_Click(object sender, EventArgs e)
+        {
+            Border_setting();
+            face4.BorderStyle = BorderStyle.Fixed3D;
+            avatar = 4;
+        }
+
+        private void face5_Click(object sender, EventArgs e)
+        {
+            Border_setting();
+            face5.BorderStyle = BorderStyle.Fixed3D;
+            avatar = 5;
+        }
+
+        private void face6_Click(object sender, EventArgs e)
+        {
+            Border_setting();
+            face6.BorderStyle = BorderStyle.Fixed3D;
+            avatar = 6;
+        }
+
+        private void Avatar_Load(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void btnchange_Click(object sender, EventArgs e)
+        {
+            bool isSuccess;
+            if(avatar !=0)
+            {
+                isSuccess = repository.Update_Avatar(avatar, 1);
+                if(isSuccess == true)
+                {
+                    DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    MessageBox.Show("Somthing went wrong");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Choose your avatar");
+            }
+
+
+
+
+
+
+                         form1
+
+
+ private void Change_Profile_Picture()
+        {
+            int Avatar = (int)repository.selectall().Rows[0][2];
+            switch (Avatar)
+            {
+                case 1:
+                    {
+                        this.profile.Load("D:\\Danial - Davood\\D & D.i\\avatars\\face1.png");
+                        break;
+                    }
+                case 2:
+                    {
+                        this.profile.Load("face2.png");
+                        break;
+                    }
+                case 3:
+                    {
+                        this.profile.Load("D:\\Danial - Davood\\D & D.i\\avatars\\face3.png");
+                        break;
+                    }
+                case 4:
+                    {
+                        this.profile.Load("D:\\Danial - Davood\\D & D.i\\avatars\\face4.png");
+                        break;
+                    }
+                case 5:
+                    {
+                        this.profile.Load("D:\\Danial - Davood\\D & D.i\\avatars\\face5.png");
+                        break;
+                    }
+                case 6:
+                    {
+                        this.profile.Load("D:\\Danial - Davood\\D & D.i\\avatars\\face6.png");
+                        break;
+                    }
+                default:
+                    break;
+            }
+        }
+
+
+
+
+
+private void profile_Click(object sender, EventArgs e)
+        {
+            Avatar avatar = new Avatar();
+            avatar.ShowDialog();
+            if(avatar.DialogResult == DialogResult.OK)
+            {
+                BindGrid();
+                Change_Profile_Picture();
+            }
+        }
